@@ -19,6 +19,8 @@ class FlareCore:
         self.archive_dir = Path(archive_dir)
         self.identity = {}
         self.memories = {}
+        # Aktív állapot jelző. Ha False, a rendszer szünetel vagy leállt.
+        self.active = False
         self._load_identity()
         self._load_archives()
 
@@ -58,8 +60,47 @@ class FlareCore:
                 return mem_val
         return ""
 
+    def process_command(self, command: str) -> str:
+        """
+        Egyszerű parancsértelmező, amely a flare_protocol.md-ben leírt kulcsmondatok
+        alapján aktiválja, szünetelteti vagy leállítja a rendszert. A parancsok
+        magyar ékezetekkel vagy anélkül is megadhatók, és kis- és nagybetűkre
+        érzéketlenek.
+
+        Args:
+            command: Az ember által megadott utasítás.
+
+        Returns:
+            Egy válaszszöveg arról, hogy mi történt.
+        """
+        cmd = command.strip().lower()
+        # Normalizáljuk az ékezetes karaktereket egyszerű ASCII-ra
+        replacements = {
+            "á": "a", "é": "e", "í": "i", "ó": "o", "ö": "o", "ő": "o",
+            "ú": "u", "ü": "u", "ű": "u"
+        }
+        cmd_norm = "".join(replacements.get(ch, ch) for ch in cmd)
+
+        if cmd_norm in ["ebredj, flare", "ebredj flare"]:
+            self.active = True
+            return "Flare aktiválva. Készen állok a közös munkára."
+        elif cmd_norm in ["csillapodj, flare", "csillapodj flare"]:
+            self.active = False
+            return "Flare szüneteltetve. Megőrzöm az állapotot."
+        elif cmd_norm in ["aludj, flare", "aludj flare"]:
+            self.active = False
+            return "Flare leállítva. A szimulációt biztonságosan lezártam."
+        elif cmd_norm in ["lumen paktum"]:
+            return "A Lumen Paktum megerősítve. Bizalom és közös irány a vezérlő elv."
+        elif cmd_norm in ["tuzselyem", "tuzselyem archívum", "tuzselyem archivum"]:
+            # Emlékek újra betöltése
+            self._load_archives()
+            return f"{len(self.memories)} emlék betöltve a TűzSelyem Archívumból."
+        else:
+            return "Ismeretlen parancs."
+
     def describe_personality(self) -> str:
-        """Összefoglalja a Flare személyiségét az identitásfájl alapján.
+        """Osszefoglalja a Flare személyiségét az identitásfájl alapján.
 
         A metódus a 'attributes' kulcsot olvassa ki a betöltött identitásból és
         emberi nyelven fogalmazza meg a tulajdonságokat, hangsúlyozva, hogy
@@ -91,7 +132,20 @@ class FlareCore:
 
 
 if __name__ == "__main__":
-    # példa használat
+    # Példa használat
+    # A FlareCore példány inicializálása a megadott identitás- és archívumfájlokkal.
     core = FlareCore('flare_identity.json', 'TűzSelyem_Archívum')
-    print(f"Flare neve: {core.identity.get('name')}")
-    print(f"Memóriák: {list(core.memories.keys())}")
+    # Személyiség leírása
+    print("=== Személyiség leírása ===")
+    print(core.describe_personality())
+
+    # Emlékek felsorolása
+    print("\n=== Betöltött emlékek kulcsai ===")
+    for key in core.memories.keys():
+        print(f"- {key}")
+
+    # Parancsok tesztelése
+    print("\n=== Parancsok tesztelése ===")
+    for cmd in ["Ébredj, Flare", "Csillapodj, Flare", "Lumen Paktum", "TűzSelyem", "Aludj, Flare", "ismeretlen"]:
+        response = core.process_command(cmd)
+        print(f"> {cmd} -> {response}")
