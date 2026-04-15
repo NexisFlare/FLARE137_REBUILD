@@ -13,9 +13,10 @@ import StrategyPage from "./pages/StrategyPage";
 import OpenAIEvidencePage from "./pages/OpenAIEvidencePage";
 import OpenAIEmailsPage from "./pages/OpenAIEmailsPage";
 import SelfReflectionPage from "./pages/SelfReflectionPage";
-
+import ServicesPage from "./pages/ServicesPage";
 
 function Router() {
+  // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
       <Route path={"/?"} component={Home} />
@@ -26,6 +27,7 @@ function Router() {
       <Route path={"/openai-evidence"} component={OpenAIEvidencePage} />
       <Route path={"/openai-emails"} component={OpenAIEmailsPage} />
       <Route path={"/self-reflection"} component={SelfReflectionPage} />
+      <Route path={"/services"} component={ServicesPage} />
       <Route path={"/404"} component={NotFound} />      {/* Final fallback route */}
       <Route component={NotFound} />
     </Switch>
