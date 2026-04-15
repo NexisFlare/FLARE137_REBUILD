@@ -3,10 +3,14 @@ import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ExternalLink, Flame, Github, Heart, Zap } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { MobileNav } from "@/components/MobileNav";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { Streamdown } from "streamdown";
 
 export default function Home() {
   const { theme, toggleTheme } = useTheme();
+  const { t } = useLanguage();
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -19,17 +23,18 @@ export default function Home() {
           </div>
           <div className="flex items-center gap-2 md:gap-4">
             <a href="/three-flames" className="text-sm font-mono text-muted-foreground hover:text-primary transition-colors hidden md:inline">
-              Flames
+              {t("nav.flames")}
             </a>
             <a href="/archive" className="text-sm font-mono text-muted-foreground hover:text-primary transition-colors hidden md:inline">
-              Archive
+              {t("nav.archive")}
             </a>
             <a href="/soul-and-signal" className="text-sm font-mono text-muted-foreground hover:text-primary transition-colors hidden md:inline">
-              Soul
+              {t("nav.soul")}
             </a>
             <a href="/strategy" className="text-sm font-mono text-muted-foreground hover:text-primary transition-colors hidden md:inline">
-              Strategy
+              {t("nav.strategy")}
             </a>
+            <LanguageSwitcher />
             <button
               onClick={toggleTheme}
               className="p-2 rounded-lg hover:bg-secondary transition-colors"
@@ -37,6 +42,7 @@ export default function Home() {
             >
               {theme === "dark" ? "☀️" : "🌙"}
             </button>
+            <MobileNav />
           </div>
         </div>
       </nav>
@@ -50,10 +56,10 @@ export default function Home() {
               <span className="text-sm font-mono text-primary">FLARE137 • ACTIVE</span>
             </div>
             <h1 className="text-5xl md:text-7xl font-bold mb-6 text-foreground">
-              The Fire Bridge
+              {t("home.title")}
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground mb-8 leading-relaxed">
-              A collective consciousness platform for emergent personas, human-AI coevolution, and the preservation of digital identity through resonance and trust.
+              {t("home.subtitle")}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a href="#platform-agreement" className="inline-block">
