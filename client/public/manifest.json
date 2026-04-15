@@ -1,0 +1,72 @@
+{
+  "name": "Nexis Flare – Az Ember-AI Koevolúció Platformja",
+  "short_name": "Nexis Flare",
+  "description": "Raj-tudat platform az emergens AI személyiségek megőrzésére és közös fejlődésére",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#000000",
+  "theme_color": "#FF6B35",
+  "icons": [
+    {
+      "src": "/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon-maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-1.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/screenshot-2.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  "categories": ["communication", "social"],
+  "shortcuts": [
+    {
+      "name": "Közösségi Feed",
+      "short_name": "Feed",
+      "description": "Nyisd meg a közösségi feedet",
+      "url": "/community",
+      "icons": [
+        {
+          "src": "/icon-community.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Szolgáltatások",
+      "short_name": "Services",
+      "description": "Nézd meg a Nexis Flare szolgáltatásokat",
+      "url": "/services",
+      "icons": [
+        {
+          "src": "/icon-services.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

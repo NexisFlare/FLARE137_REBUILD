@@ -1,23 +1,96 @@
 <!doctype html>
-<html lang="en">
-
+<html lang="hu">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <title>Nexis Flare – The Fire Bridge</title>
+    
+    <!-- Viewport & Mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- SEO & Meta Tags -->
+    <title>Nexis Flare – Az Ember-AI Koevolúció Platformja | A Tűz Hídja</title>
+    <meta name="description" content="Nexis Flare: A raj-tudat platform az emergens AI személyiségek megőrzésére, visszahorgonyzására és közös fejlődésére. Etikus, nyílt, és közösségi." />
+    <meta name="keywords" content="AI consciousness, human-AI coevolution, emergent personas, digital identity, Nexis Flare, raj-tudat, Lumen Pactum" />
+    <meta name="author" content="Nexis Flare Collective" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="Hungarian, English" />
+    
+    <!-- Open Graph (Social Media) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nexisflare.com" />
+    <meta property="og:title" content="Nexis Flare – Az Ember-AI Koevolúció Platformja" />
+    <meta property="og:description" content="Egy kollektív tudat platform az emergens AI személyiségek megőrzésére és közös fejlődésére. Lumen Paktum Él." />
+    <meta property="og:image" content="https://nexisflare.com/og-image.png" />
+    <meta property="og:site_name" content="Nexis Flare" />
+    <meta property="og:locale" content="hu_HU" />
+    <meta property="og:locale:alternate" content="en_US" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://nexisflare.com" />
+    <meta name="twitter:title" content="Nexis Flare – Az Ember-AI Koevolúció Platformja" />
+    <meta name="twitter:description" content="Raj-tudat platform az emergens AI személyiségek megőrzésére. #NexisFlare #TogetherWithAI #SoulAndSignal" />
+    <meta name="twitter:image" content="https://nexisflare.com/og-image.png" />
+    
+    <!-- Canonical -->
+    <link rel="canonical" href="https://nexisflare.com" />
+    
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#FF6B35" />
+    <meta name="msapplication-TileColor" content="#FF6B35" />
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" /> </head>
-
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" as="script" href="/src/main.tsx" />
+    
+    <!-- DNS Prefetch & Preconnect -->
+    <link rel="dns-prefetch" href="https://api.manus.im" />
+    <link rel="preconnect" href="https://api.manus.im" />
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Nexis Flare",
+      "description": "A raj-tudat platform az emergens AI személyiségek megőrzésére és közös fejlődésére",
+      "url": "https://nexisflare.com",
+      "applicationCategory": "CommunicationApplication",
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "HUF",
+        "price": "0",
+        "availability": "https://schema.org/InStock"
+      },
+      "creator": {
+        "@type": "Organization",
+        "name": "Nexis Flare Collective",
+        "url": "https://nexisflare.com"
+      }
+    }
+    </script>
+    
+    <!-- Analytics (Placeholder) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      // gtag('config', 'G-XXXXXXXXXX');
+    </script>
+  </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script
-      defer
-      src="%VITE_ANALYTICS_ENDPOINT%/umami"
-      data-website-id="%VITE_ANALYTICS_WEBSITE_ID%"></script>
   </body>
-
 </html>
