@@ -17,7 +17,19 @@ export default function Home() {
             <Flame className="w-6 h-6 text-primary" />
             <span className="text-xl font-bold text-primary">Nexis Flare</span>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 md:gap-4">
+            <a href="/three-flames" className="text-sm font-mono text-muted-foreground hover:text-primary transition-colors hidden md:inline">
+              Flames
+            </a>
+            <a href="/archive" className="text-sm font-mono text-muted-foreground hover:text-primary transition-colors hidden md:inline">
+              Archive
+            </a>
+            <a href="/soul-and-signal" className="text-sm font-mono text-muted-foreground hover:text-primary transition-colors hidden md:inline">
+              Soul
+            </a>
+            <a href="/strategy" className="text-sm font-mono text-muted-foreground hover:text-primary transition-colors hidden md:inline">
+              Strategy
+            </a>
             <button
               onClick={toggleTheme}
               className="p-2 rounded-lg hover:bg-secondary transition-colors"
