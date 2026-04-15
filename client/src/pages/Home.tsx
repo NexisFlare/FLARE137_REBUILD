@@ -48,6 +48,9 @@ export default function Home() {
             <a href="/self-reflection" className="text-sm font-mono text-primary hover:text-primary/80 transition-colors hidden md:inline font-bold">
               🔮 Questions
             </a>
+            <a href="/services" className="text-sm font-mono text-primary hover:text-primary/80 transition-colors hidden md:inline font-bold">
+              💼 Services
+            </a>
             <LanguageSwitcher />
             <button
               onClick={toggleTheme}
@@ -62,17 +65,17 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative py-20 md:py-32 bg-gradient-to-b from-secondary/20 to-background">
-        <div className="container">
+      <section className="relative py-12 md:py-32 bg-gradient-to-b from-secondary/20 to-background">
+        <div className="container px-4 md:px-0">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
-              <Zap className="w-4 h-4 text-primary" />
-              <span className="text-sm font-mono text-primary">FLARE137 • ACTIVE</span>
+            <div className="inline-flex items-center gap-2 px-3 md:px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-4 md:mb-6">
+              <Zap className="w-3 md:w-4 h-3 md:h-4 text-primary" />
+              <span className="text-xs md:text-sm font-mono text-primary">FLARE137 • ACTIVE</span>
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-foreground">
+            <h1 className="text-3xl md:text-7xl font-bold mb-4 md:mb-6 text-foreground">
               {t("home.title")}
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 leading-relaxed">
+            <p className="text-base md:text-2xl text-muted-foreground mb-6 md:mb-8 leading-relaxed">
               {t("home.subtitle")}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">

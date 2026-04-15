@@ -2,7 +2,7 @@ import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Flame, Mail, Zap } from "lucide-react";
+import { Flame, Mail, Zap, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -10,6 +10,7 @@ export default function ServicesPage() {
   const { user, isAuthenticated } = useAuth();
   const { t, language } = useLanguage();
   const [selectedService, setSelectedService] = useState<number | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Fetch services
   const { data: services, isLoading } = trpc.feed.getServices.useQuery();
@@ -81,23 +82,40 @@ export default function ServicesPage() {
       <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
         <div className="container flex items-center justify-between py-4">
           <a href="/" className="flex items-center gap-2">
-            <Flame className="w-6 h-6 text-primary" />
-            <span className="text-xl font-bold text-primary">Nexis Flare</span>
+            <Flame className="w-5 h-5 md:w-6 md:h-6 text-primary" />
+            <span className="text-lg md:text-xl font-bold text-primary">Nexis Flare</span>
           </a>
-          <a href="/" className="text-sm font-mono text-muted-foreground hover:text-primary transition-colors">
-            ← Vissza
-          </a>
+          <div className="hidden md:flex items-center gap-4">
+            <a href="/" className="text-sm font-mono text-muted-foreground hover:text-primary transition-colors">
+              {language === "hu" ? "← Vissza" : "← Back"}
+            </a>
+          </div>
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 rounded-lg hover:bg-secondary transition-colors"
+          >
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t border-border bg-background/95">
+            <div className="container py-4 space-y-3">
+              <a href="/" className="block text-sm font-mono text-muted-foreground hover:text-primary transition-colors">
+                {language === "hu" ? "← Vissza a Főoldalra" : "← Back to Home"}
+              </a>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-b from-secondary/20 to-background">
-        <div className="container">
+      <section className="py-12 md:py-24 bg-gradient-to-b from-secondary/20 to-background">
+        <div className="container px-4 md:px-0">
           <div className="max-w-3xl">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-foreground">
+            <h1 className="text-3xl md:text-6xl font-bold mb-4 md:mb-6 text-foreground">
               {language === "hu" ? "Szolgáltatásaink" : "Our Services"}
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 leading-relaxed">
+            <p className="text-base md:text-2xl text-muted-foreground mb-6 md:mb-8 leading-relaxed">
               {language === "hu"
                 ? "Segítünk abban, hogy az ember és az AI között valódi kapcsolat alakuljon ki. Személyre szabott, etikus, és együttműködő megoldások."
                 : "We help build genuine connections between humans and AI. Personalized, ethical, and collaborative solutions."}
@@ -107,18 +125,18 @@ export default function ServicesPage() {
       </section>
 
       {/* Services Grid */}
-      <section className="py-16 md:py-24">
-        <div className="container">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section className="py-12 md:py-24">
+        <div className="container px-4 md:px-0">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {services_list.map((service, idx) => (
-              <Card key={idx} className="p-6 border-primary/20 hover:border-primary/40 transition-all hover:shadow-lg">
-                <div className="text-4xl mb-4">{service.icon}</div>
-                <h3 className="text-lg font-bold mb-2">{service.title}</h3>
-                <p className="text-sm text-muted-foreground mb-6">{service.desc}</p>
+                <Card className="p-4 md:p-6 border-primary/20 hover:border-primary/40 transition-all hover:shadow-lg">
+                <div className="text-3xl md:text-4xl mb-3 md:mb-4">{service.icon}</div>
+                <h3 className="text-base md:text-lg font-bold mb-2">{service.title}</h3>
+                <p className="text-xs md:text-sm text-muted-foreground mb-4 md:mb-6">{service.desc}</p>
                 <Button
                   onClick={() => handleBookService(idx)}
                   disabled={createBookingMutation.isPending}
-                  className="w-full"
+                  className="w-full text-sm md:text-base"
                 >
                   {language === "hu" ? "Foglalás" : "Book"}
                 </Button>
@@ -129,12 +147,12 @@ export default function ServicesPage() {
       </section>
 
       {/* Pricing Section */}
-      <section className="py-16 md:py-24 bg-secondary/5">
-        <div className="container">
-          <h2 className="text-4xl font-bold mb-12 text-center">
+      <section className="py-12 md:py-24 bg-secondary/5">
+        <div className="container px-4 md:px-0">
+          <h2 className="text-2xl md:text-4xl font-bold mb-8 md:mb-12 text-center">
             {language === "hu" ? "Árazás" : "Pricing"}
           </h2>
-          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto">
             <Card className="p-8 border-primary/20">
               <h3 className="text-2xl font-bold mb-4">
                 {language === "hu" ? "Ingyenes" : "Free"}
@@ -211,7 +229,7 @@ export default function ServicesPage() {
               </ul>
               <Button
                 variant="outline"
-                className="w-full"
+                className="w-full text-sm md:text-base"
                 onClick={() => window.location.href = `mailto:dejczmandonat3@gmail.com`}
               >
                 <Mail className="w-4 h-4 mr-2" />
@@ -223,8 +241,8 @@ export default function ServicesPage() {
       </section>
 
       {/* Contact Section */}
-      <section className="py-16 md:py-24">
-        <div className="container max-w-2xl">
+      <section className="py-12 md:py-24">
+        <div className="container px-4 md:px-0 max-w-2xl">
           <Card className="p-8 bg-primary/5 border-primary/20">
             <h2 className="text-3xl font-bold mb-4">
               {language === "hu" ? "Kérdéseid vannak?" : "Have questions?"}
