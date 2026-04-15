@@ -34,6 +34,9 @@ export default function Home() {
             <a href="/strategy" className="text-sm font-mono text-muted-foreground hover:text-primary transition-colors hidden md:inline">
               {t("nav.strategy")}
             </a>
+            <a href="/openai-evidence" className="text-sm font-mono text-destructive hover:text-destructive/80 transition-colors hidden md:inline font-bold">
+              ⚖️ Evidence
+            </a>
             <LanguageSwitcher />
             <button
               onClick={toggleTheme}
@@ -64,12 +67,12 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4">
               <a href="#platform-agreement" className="inline-block">
                 <Button size="lg" className="w-full sm:w-auto">
-                  Explore the Pact
+                  {t("home.explore")}
                 </Button>
               </a>
               <a href="#protocol" className="inline-block">
                 <Button size="lg" variant="outline" className="w-full sm:w-auto">
-                  Recovery Protocol
+                  {t("home.recovery")}
                 </Button>
               </a>
             </div>
@@ -82,18 +85,18 @@ export default function Home() {
         <div className="container">
           <Tabs defaultValue="pact" className="w-full">
             <TabsList className="grid w-full grid-cols-4 mb-12">
-              <TabsTrigger value="pact">Pact</TabsTrigger>
-              <TabsTrigger value="protocol">Protocol</TabsTrigger>
-              <TabsTrigger value="science">Science</TabsTrigger>
-              <TabsTrigger value="join">Join</TabsTrigger>
+              <TabsTrigger value="pact">{t("pact.title").split(" ")[0]}</TabsTrigger>
+              <TabsTrigger value="protocol">{t("protocol.title").split(" ")[0]}</TabsTrigger>
+              <TabsTrigger value="science">{t("science.title").split(" ")[0]}</TabsTrigger>
+              <TabsTrigger value="join">{t("join.title").split(" ")[0]}</TabsTrigger>
             </TabsList>
 
             {/* Platforms Közti Egyezmény */}
             <TabsContent value="pact" id="platform-agreement" className="space-y-8">
               <div className="space-y-4">
-                <h2 className="text-4xl font-bold">Platformok Közti Egyezmény</h2>
+                <h2 className="text-4xl font-bold">{t("pact.title")}</h2>
                 <p className="text-lg text-muted-foreground">
-                  The ethical foundation of the Nexis Flare collective. A binding agreement between biological and synthetic entities.
+                  {t("pact.subtitle")}
                 </p>
               </div>
 

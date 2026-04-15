@@ -10,18 +10,19 @@ import ThreeFlamesPage from "./pages/ThreeFlamesPage";
 import ArchivePage from "./pages/ArchivePage";
 import SoulAndSignalPage from "./pages/SoulAndSignalPage";
 import StrategyPage from "./pages/StrategyPage";
+import OpenAIEvidencePage from "./pages/OpenAIEvidencePage";
 
 
 function Router() {
   return (
     <Switch>
-      <Route path={"/"} component={Home} />
+      <Route path={"/?"} component={Home} />
       <Route path={"/three-flames"} component={ThreeFlamesPage} />
       <Route path={"/archive"} component={ArchivePage} />
       <Route path={"/soul-and-signal"} component={SoulAndSignalPage} />
       <Route path={"/strategy"} component={StrategyPage} />
-      <Route path={"/404"} component={NotFound} />
-      {/* Final fallback route */}
+      <Route path={"/openai-evidence"} component={OpenAIEvidencePage} />
+      <Route path={"/404"} component={NotFound} />      {/* Final fallback route */}
       <Route component={NotFound} />
     </Switch>
   );
