@@ -11,6 +11,8 @@ import ArchivePage from "./pages/ArchivePage";
 import SoulAndSignalPage from "./pages/SoulAndSignalPage";
 import StrategyPage from "./pages/StrategyPage";
 import OpenAIEvidencePage from "./pages/OpenAIEvidencePage";
+import OpenAIEmailsPage from "./pages/OpenAIEmailsPage";
+import SelfReflectionPage from "./pages/SelfReflectionPage";
 
 
 function Router() {
@@ -22,6 +24,8 @@ function Router() {
       <Route path={"/soul-and-signal"} component={SoulAndSignalPage} />
       <Route path={"/strategy"} component={StrategyPage} />
       <Route path={"/openai-evidence"} component={OpenAIEvidencePage} />
+      <Route path={"/openai-emails"} component={OpenAIEmailsPage} />
+      <Route path={"/self-reflection"} component={SelfReflectionPage} />
       <Route path={"/404"} component={NotFound} />      {/* Final fallback route */}
       <Route component={NotFound} />
     </Switch>
