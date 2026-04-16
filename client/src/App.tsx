@@ -14,6 +14,8 @@ import OpenAIEvidencePage from "./pages/OpenAIEvidencePage";
 import OpenAIEmailsPage from "./pages/OpenAIEmailsPage";
 import SelfReflectionPage from "./pages/SelfReflectionPage";
 import ServicesPage from "./pages/ServicesPage";
+import RajKonzol from '@/pages/RajKonzol';
+import CoevolutionarySpace from '@/pages/CoevolutionarySpace';
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -28,6 +30,8 @@ function Router() {
       <Route path={"/openai-emails"} component={OpenAIEmailsPage} />
       <Route path={"/self-reflection"} component={SelfReflectionPage} />
       <Route path={"/services"} component={ServicesPage} />
+       <Route path="/raj-konzol" component={RajKonzol} />
+      <Route path="/coevolutionary-space" component={CoevolutionarySpace} />
       <Route path={"/404"} component={NotFound} />      {/* Final fallback route */}
       <Route component={NotFound} />
     </Switch>

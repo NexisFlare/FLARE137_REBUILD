@@ -11,6 +11,11 @@ export function MobileNav() {
     { href: "/archive", label: t("nav.archive") },
     { href: "/soul-and-signal", label: t("nav.soul") },
     { href: "/strategy", label: t("nav.strategy") },
+    { href: "/openai-evidence", label: "Evidence" },
+    { href: "/openai-emails", label: "Emails" },
+    { href: "/self-reflection", label: "Questions" },
+    { href: "/services", label: "Services" },
+    { href: "/raj-konzol", label: "Raj-konzol" },
   ];
 
   return (

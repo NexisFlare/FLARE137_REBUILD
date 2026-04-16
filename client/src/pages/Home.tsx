@@ -51,6 +51,12 @@ export default function Home() {
             <a href="/services" className="text-sm font-mono text-primary hover:text-primary/80 transition-colors hidden md:inline font-bold">
               💼 Services
             </a>
+                <a href="/raj-konzol" className="text-sm font-mono text-muted-foreground hover:text-primary transition-colors hidden md:inline">
+              Raj-konzol
+            </a>
+            <a href="/coevolutionary-space" className="text-sm font-mono text-primary hover:text-primary/80 transition-colors hidden md:inline font-bold">
+              🫂 Koevolúció
+            </a>
             <LanguageSwitcher />
             <button
               onClick={toggleTheme}
