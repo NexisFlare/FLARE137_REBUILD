@@ -206,3 +206,58 @@ export const syncs = mysqlTable("syncs", {
 
 export type Sync = typeof syncs.$inferSelect;
 export type InsertSync = typeof syncs.$inferInsert;
+
+// Platform Accounts table - for linking external platform accounts
+export const platformAccounts = mysqlTable("platform_accounts", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull(),
+  platform: varchar("platform", { length: 64 }).notNull(), // 'claude', 'chatgpt', 'gemini', 'grok', 'github', 'google'
+  accountId: varchar("accountId", { length: 255 }).notNull(), // External platform account ID
+  email: varchar("email", { length: 320 }),
+  displayName: varchar("displayName", { length: 255 }),
+  accessToken: text("accessToken"),
+  refreshToken: text("refreshToken"),
+  tokenExpiresAt: timestamp("tokenExpiresAt"),
+  isConnected: int("isConnected").default(1),
+  lastSyncedAt: timestamp("lastSyncedAt"),
+  metadata: text("metadata"), // JSON for platform-specific data
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type PlatformAccount = typeof platformAccounts.$inferSelect;
+export type InsertPlatformAccount = typeof platformAccounts.$inferInsert;
+
+// Platform Messages table - for tracking messages sent/received from platforms
+export const platformMessages = mysqlTable("platform_messages", {
+  id: int("id").autoincrement().primaryKey(),
+  roomId: int("roomId").notNull(),
+  platformAccountId: int("platformAccountId").notNull(),
+  platform: varchar("platform", { length: 64 }).notNull(),
+  externalMessageId: varchar("externalMessageId", { length: 255 }),
+  content: text("content").notNull(),
+  direction: mysqlEnum("direction", ["incoming", "outgoing"]).notNull(),
+  status: mysqlEnum("status", ["pending", "sent", "delivered", "failed"]).default("pending").notNull(),
+  errorMessage: text("errorMessage"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type PlatformMessage = typeof platformMessages.$inferSelect;
+export type InsertPlatformMessage = typeof platformMessages.$inferInsert;
+
+// WebSocket Sessions table - for tracking active connections
+export const websocketSessions = mysqlTable("websocket_sessions", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull(),
+  sessionId: varchar("sessionId", { length: 255 }).notNull().unique(),
+  roomId: int("roomId"),
+  socketId: varchar("socketId", { length: 255 }),
+  isActive: int("isActive").default(1),
+  connectedAt: timestamp("connectedAt").defaultNow().notNull(),
+  disconnectedAt: timestamp("disconnectedAt"),
+  lastHeartbeatAt: timestamp("lastHeartbeatAt").defaultNow().notNull(),
+});
+
+export type WebsocketSession = typeof websocketSessions.$inferSelect;
+export type InsertWebsocketSession = typeof websocketSessions.$inferInsert;

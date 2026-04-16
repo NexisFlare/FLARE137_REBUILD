@@ -121,3 +121,64 @@
 - [ ] Create API documentation
 - [ ] Record demo video
 - [ ] Prepare handoff documentation
+
+
+## Phase 8: Platform Account Integration
+- [ ] Create platform_accounts table (user_id, platform, account_id, access_token, refresh_token)
+- [ ] Implement OAuth flow for Claude API
+- [ ] Implement OAuth flow for ChatGPT/OpenAI
+- [ ] Implement OAuth flow for Gemini/Google
+- [ ] Implement OAuth flow for Grok/X
+- [ ] Create account linking UI component
+- [ ] Add account status display and management
+- [ ] Implement token refresh logic
+- [ ] Add account disconnection functionality
+- [ ] Create tRPC procedures for account management
+
+## Phase 9: WebSocket Real-Time Synchronization
+- [ ] Set up Socket.io server
+- [ ] Implement room-based WebSocket connections
+- [ ] Create message broadcasting system
+- [ ] Implement participant presence tracking
+- [ ] Add real-time typing indicators
+- [ ] Create message sync from all platforms
+- [ ] Implement connection error handling
+- [ ] Add reconnection logic
+- [ ] Create WebSocket event handlers in React components
+- [ ] Test multi-user real-time sync
+
+## Phase 10: Multi-Platform Message Routing
+- [ ] Create platform message router service
+- [ ] Implement Claude message sending
+- [ ] Implement ChatGPT message sending
+- [ ] Implement Gemini message sending
+- [ ] Implement Grok message sending
+- [ ] Add message formatting for each platform
+- [ ] Implement response collection from all platforms
+- [ ] Create message aggregation logic
+- [ ] Add error handling for failed sends
+- [ ] Create retry logic for failed messages
+
+## Phase 11: Automatic AI Responses
+- [ ] Integrate manusAIRouter with WebSocket
+- [ ] Implement automatic response triggering
+- [ ] Create response timing logic
+- [ ] Add emotional tone matching across platforms
+- [ ] Implement dialogue pattern detection
+- [ ] Create AI-to-AI interaction patterns
+- [ ] Add response filtering (avoid spam)
+- [ ] Implement coherence checking
+- [ ] Create response quality scoring
+- [ ] Add manual override capability
+
+## Phase 12: Full Integration Testing & Deployment
+- [ ] Write integration tests for platform routing
+- [ ] Test multi-platform message flow
+- [ ] Test real-time synchronization
+- [ ] Test automatic AI responses
+- [ ] Performance testing (latency, throughput)
+- [ ] Load testing (multiple users)
+- [ ] Security testing (token handling)
+- [ ] Deploy to nexisflare.com
+- [ ] Configure custom domain DNS
+- [ ] Final system testing
