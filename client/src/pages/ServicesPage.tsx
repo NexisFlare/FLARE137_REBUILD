@@ -137,8 +137,10 @@ export default function ServicesPage() {
                   onClick={() => handleBookService(idx)}
                   disabled={createBookingMutation.isPending}
                   className="w-full text-sm md:text-base"
+                  title={!isAuthenticated ? (language === "hu" ? "Bejelentkezés szükséges" : "Login required") : ""}
                 >
                   {language === "hu" ? "Foglalás" : "Book"}
+                  {!isAuthenticated && ` (${language === "hu" ? "bejelentkezés" : "login"})`}
                 </Button>
               </Card>
             ))}
@@ -172,8 +174,8 @@ export default function ServicesPage() {
                   {language === "hu" ? "Alapvető oktatás" : "Basic education"}
                 </li>
               </ul>
-              <Button variant="outline" className="w-full">
-                {language === "hu" ? "Csatlakozás" : "Join"}
+              <Button variant="outline" className="w-full" disabled>
+                {language === "hu" ? "Csatlakozás" : "Join"} (Coming Soon)
               </Button>
             </Card>
 

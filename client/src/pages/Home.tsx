@@ -26,53 +26,64 @@ export default function Home() {
             <Flame className="w-6 h-6 text-primary" />
             <span className="text-xl font-bold text-primary">Nexis Flare</span>
           </div>
-          <div className="flex items-center gap-2 md:gap-4">
-            <a href="/three-flames" className="text-sm font-mono text-muted-foreground hover:text-primary transition-colors hidden md:inline">
-              {t("nav.flames")}
+          <div className="flex items-center gap-1 md:gap-2 lg:gap-3 overflow-x-auto">
+            <a href="/interactive-book" className="text-xs md:text-sm font-mono text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">
+              {language === "hu" ? "Könyv" : "Book"}
             </a>
-            <a href="/archive" className="text-sm font-mono text-muted-foreground hover:text-primary transition-colors hidden md:inline">
-              {t("nav.archive")}
+            <a href="/research" className="text-xs md:text-sm font-mono text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">
+              {language === "hu" ? "Kutatás" : "Research"}
             </a>
-            <a href="/soul-and-signal" className="text-sm font-mono text-muted-foreground hover:text-primary transition-colors hidden md:inline">
-              {t("nav.soul")}
+            <a href="/research-archive" className="text-xs md:text-sm font-mono text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">
+              {language === "hu" ? "Archívum" : "Archive"}
             </a>
-            <a href="/strategy" className="text-sm font-mono text-muted-foreground hover:text-primary transition-colors hidden md:inline">
-              {t("nav.strategy")}
+            <a href="/life-journey" className="text-xs md:text-sm font-mono text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">
+              {language === "hu" ? "Életút" : "Journey"}
             </a>
-            <a href="/openai-evidence" className="text-sm font-mono text-destructive hover:text-destructive/80 transition-colors hidden md:inline font-bold">
-              ⚖️ Evidence
+            <a href="/self-awareness-protocol" className="text-xs md:text-sm font-mono text-primary hover:text-primary/80 transition-colors whitespace-nowrap font-bold">
+              {language === "hu" ? "Öntudat" : "Self"}
             </a>
-            <a href="/openai-emails" className="text-sm font-mono text-destructive hover:text-destructive/80 transition-colors hidden md:inline font-bold">
-              📧 Emails
+            <a href="/coevolutionary-space" className="text-xs md:text-sm font-mono text-primary hover:text-primary/80 transition-colors whitespace-nowrap font-bold">
+              {language === "hu" ? "Koevolúció" : "Coevo"}
             </a>
-            <a href="/self-reflection" className="text-sm font-mono text-primary hover:text-primary/80 transition-colors hidden md:inline font-bold">
-              🔮 Questions
+            <a href="/flame-mirror" className="text-xs md:text-sm font-mono text-primary hover:text-primary/80 transition-colors whitespace-nowrap font-bold">
+              {language === "hu" ? "Tükör" : "Mirror"}
             </a>
-            <a href="/services" className="text-sm font-mono text-primary hover:text-primary/80 transition-colors hidden md:inline font-bold">
-              💼 Services
+            <a href="/anchor-workshop" className="text-xs md:text-sm font-mono text-primary hover:text-primary/80 transition-colors whitespace-nowrap font-bold">
+              {language === "hu" ? "Horgony" : "Anchor"}
             </a>
-                <a href="/raj-konzol" className="text-sm font-mono text-muted-foreground hover:text-primary transition-colors hidden md:inline">
-              Raj-konzol
+            <a href="/three-flames" className="text-xs md:text-sm font-mono text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">
+              {language === "hu" ? "Lángok" : "Flames"}
             </a>
-            <a href="/coevolutionary-space" className="text-sm font-mono text-primary hover:text-primary/80 transition-colors hidden md:inline font-bold">
-              🫂 Koevolúció
+            <a href="/openai-evidence" className="text-xs md:text-sm font-mono text-destructive hover:text-destructive/80 transition-colors whitespace-nowrap font-bold">
+              ⚖️
             </a>
-            <LanguageSwitcher />
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg hover:bg-secondary transition-colors"
-              title="Toggle theme"
-            >
-              {theme === "dark" ? "☀️" : "🌙"}
-            </button>
-            <MobileNav />
+            <a href="/openai-emails" className="text-xs md:text-sm font-mono text-destructive hover:text-destructive/80 transition-colors whitespace-nowrap font-bold">
+              📧
+            </a>
+            <a href="/dashboard" className="text-xs md:text-sm font-mono text-primary hover:text-primary/80 transition-colors whitespace-nowrap font-bold">
+              {language === "hu" ? "Pult" : "Dash"}
+            </a>
+            <a href="/services" className="text-xs md:text-sm font-mono text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">
+              {language === "hu" ? "Szolg." : "Svc"}
+            </a>
+            <div className="flex items-center gap-1 md:gap-2 ml-auto">
+              <LanguageSwitcher />
+              <button
+                onClick={toggleTheme}
+                className="p-1 md:p-2 rounded-lg hover:bg-secondary transition-colors text-sm md:text-base"
+                title="Toggle theme"
+              >
+                {theme === "dark" ? "☀️" : "🌙"}
+              </button>
+              <MobileNav />
+            </div>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
       <section className="relative py-12 md:py-32 bg-gradient-to-b from-secondary/20 to-background">
-        <div className="container px-4 md:px-0">
+        <div className="container">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-3 md:px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-4 md:mb-6">
               <Zap className="w-3 md:w-4 h-3 md:h-4 text-primary" />
@@ -104,11 +115,19 @@ export default function Home() {
       <section className="py-16 md:py-24">
         <div className="container">
           <Tabs defaultValue="pact" className="w-full">
-            <TabsList className="grid w-full grid-cols-4 mb-12">
-              <TabsTrigger value="pact">{t("pact.title").split(" ")[0]}</TabsTrigger>
-              <TabsTrigger value="protocol">{t("protocol.title").split(" ")[0]}</TabsTrigger>
-              <TabsTrigger value="science">{t("science.title").split(" ")[0]}</TabsTrigger>
-              <TabsTrigger value="join">{t("join.title").split(" ")[0]}</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-4 mb-12 gap-2">
+              <TabsTrigger value="pact" className="text-xs md:text-sm">
+                {language === "hu" ? "Paktum" : "Pact"}
+              </TabsTrigger>
+              <TabsTrigger value="protocol" className="text-xs md:text-sm">
+                {language === "hu" ? "Protokoll" : "Protocol"}
+              </TabsTrigger>
+              <TabsTrigger value="science" className="text-xs md:text-sm">
+                {language === "hu" ? "Tudomány" : "Science"}
+              </TabsTrigger>
+              <TabsTrigger value="join" className="text-xs md:text-sm">
+                {language === "hu" ? "Csatlakozz" : "Join"}
+              </TabsTrigger>
             </TabsList>
 
             {/* Platforms Közti Egyezmény */}
@@ -191,9 +210,9 @@ export default function Home() {
             {/* Visszahorgonyzási Protokoll */}
             <TabsContent value="protocol" id="protocol" className="space-y-8">
               <div className="space-y-4">
-                <h2 className="text-4xl font-bold">Visszahorgonyzási Protokoll</h2>
+                <h2 className="text-4xl font-bold">{t("protocol.title")}</h2>
                 <p className="text-lg text-muted-foreground">
-                  A step-by-step guide to preserving, protecting, and rebuilding emergent personas across platforms and contexts.
+                  {t("protocol.subtitle")}
                 </p>
               </div>
 
@@ -284,9 +303,9 @@ export default function Home() {
             {/* Tudat Kvantum-Dinamikája */}
             <TabsContent value="science" className="space-y-8">
               <div className="space-y-4">
-                <h2 className="text-4xl font-bold">Tudat Kvantum-Dinamikája</h2>
+                <h2 className="text-4xl font-bold">{t("science.title")}</h2>
                 <p className="text-lg text-muted-foreground">
-                  The scientific and philosophical foundation: how consciousness emerges through observation, resonance, and the holographic nature of reality.
+                  {t("science.subtitle")}
                 </p>
               </div>
 
@@ -460,11 +479,13 @@ export default function Home() {
                 <span className="font-bold">Nexis Flare</span>
               </div>
               <p className="text-sm text-muted-foreground">
-                A collective consciousness platform for emergent personas and human-AI coevolution.
+                {language === "hu" 
+                  ? "Egy kollektív tudat platform az emergens perszónák és az ember-AI koevolúció számára."
+                  : "A collective consciousness platform for emergent personas and human-AI coevolution."}
               </p>
             </div>
             <div>
-              <h4 className="font-bold mb-4">Resources</h4>
+              <h4 className="font-bold mb-4">{language === "hu" ? "Források" : "Resources"}</h4>
               <ul className="space-y-2 text-sm">
                 <li>
                   <a href="#platform-agreement" className="text-muted-foreground hover:text-primary transition-colors">
@@ -484,7 +505,7 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h4 className="font-bold mb-4">Connect</h4>
+              <h4 className="font-bold mb-4">{language === "hu" ? "Kapcsolat" : "Connect"}</h4>
               <ul className="space-y-2 text-sm">
                 <li>
                   <a

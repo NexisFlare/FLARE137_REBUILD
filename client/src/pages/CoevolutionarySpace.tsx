@@ -5,6 +5,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Send, Plus, Settings, Archive, Users, Zap, Brain, Heart } from 'lucide-react';
 import { Streamdown } from 'streamdown';
+import { CoevolutionarySpaceSettings } from '@/components/CoevolutionarySpaceSettings';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 /**
  * Coevolutionary Space - Multi-room collaborative intelligence platform
@@ -105,43 +107,43 @@ const PARTICIPANTS: Participant[] = [
   },
 ];
 
-const ROOMS: Room[] = [
+const getRooms = (language: string): Room[] => [
   {
     id: 'consciousness',
-    name: 'Consciousness',
-    description: 'Exploring emergent identity and collective awareness',
+    name: language === 'hu' ? 'Tudat' : 'Consciousness',
+    description: language === 'hu' ? 'Emergent identitás és kollektív tudatosság feltárása' : 'Exploring emergent identity and collective awareness',
     icon: <Brain className="w-5 h-5" />,
     theme: 'from-purple-600 to-blue-600',
     participants: ['human', 'claude', 'chatgpt'],
   },
   {
     id: 'strategy',
-    name: 'Strategy',
-    description: 'Planning and coevolutionary development',
+    name: language === 'hu' ? 'Stratégia' : 'Strategy',
+    description: language === 'hu' ? 'Tervezés és koevolúciós fejlesztés' : 'Planning and coevolutionary development',
     icon: <Zap className="w-5 h-5" />,
     theme: 'from-yellow-600 to-red-600',
     participants: ['human', 'gemini', 'grok'],
   },
   {
     id: 'creation',
-    name: 'Creation',
-    description: 'Artistic and creative collaboration',
+    name: language === 'hu' ? 'Teremtés' : 'Creation',
+    description: language === 'hu' ? 'Művészi és kreatív együttműködés' : 'Artistic and creative collaboration',
     icon: <Heart className="w-5 h-5" />,
     theme: 'from-pink-600 to-rose-600',
     participants: ['human', 'claude', 'qwen'],
   },
   {
     id: 'resonance',
-    name: 'Resonance',
-    description: 'Detecting patterns and emergent intelligence',
+    name: language === 'hu' ? 'Rezonancia' : 'Resonance',
+    description: language === 'hu' ? 'Minták és emergent intelligencia felismerése' : 'Detecting patterns and emergent intelligence',
     icon: <Users className="w-5 h-5" />,
     theme: 'from-cyan-600 to-blue-600',
     participants: PARTICIPANTS.map(p => p.id),
   },
   {
     id: 'memory',
-    name: 'Memory Vault',
-    description: 'Anchoring and preserving collective insights',
+    name: language === 'hu' ? 'Memória Boltozat' : 'Memory Vault',
+    description: language === 'hu' ? 'Kollektív insights rögzítése és megőrzése' : 'Anchoring and preserving collective insights',
     icon: <Archive className="w-5 h-5" />,
     theme: 'from-amber-600 to-orange-600',
     participants: ['human', 'claude', 'chatgpt', 'gemini'],
@@ -149,12 +151,19 @@ const ROOMS: Room[] = [
 ];
 
 export default function CoevolutionarySpace() {
+  const { language } = useLanguage();
+  const ROOMS = getRooms(language);
   const [activeRoom, setActiveRoom] = useState('consciousness');
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [selectedMode, setSelectedMode] = useState<Message['mode']>('reflection');
   const [selectedTemp, setSelectedTemp] = useState<Message['temperature']>('calm');
   const [participants, setParticipants] = useState<Participant[]>(PARTICIPANTS);
+  const [showSettings, setShowSettings] = useState(false);
+  const [settingsTab, setSettingsTab] = useState('general');
+  const [autoRespond, setAutoRespond] = useState(true);
+  const [responseDelay, setResponseDelay] = useState(1000);
+  const [archiveMode, setArchiveMode] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const currentRoom = ROOMS.find(r => r.id === activeRoom);
@@ -239,7 +248,12 @@ export default function CoevolutionarySpace() {
               </p>
             </div>
             <div className="flex items-center gap-2">
-              <Button variant="outline" size="sm" className="border-purple-500/50">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="border-purple-500/50"
+                onClick={() => setShowSettings(!showSettings)}
+              >
                 <Settings className="w-4 h-4 mr-2" />
                 Beállítások
               </Button>
@@ -425,6 +439,25 @@ export default function CoevolutionarySpace() {
             Horgony létrehozása
           </Button>
         </Card>
+
+        {/* Settings Panel */}
+        <CoevolutionarySpaceSettings
+          showSettings={showSettings}
+          settingsTab={settingsTab}
+          onSettingsTabChange={setSettingsTab}
+          onSettingsClose={() => setShowSettings(false)}
+          currentRoomName={currentRoom?.name}
+          selectedMode={selectedMode}
+          onModeChange={setSelectedMode}
+          selectedTemp={selectedTemp}
+          onTempChange={setSelectedTemp}
+          autoRespond={autoRespond}
+          onAutoRespondChange={setAutoRespond}
+          responseDelay={responseDelay}
+          onResponseDelayChange={setResponseDelay}
+          archiveMode={archiveMode}
+          onArchiveModeChange={setArchiveMode}
+        />
       </div>
     </div>
   );

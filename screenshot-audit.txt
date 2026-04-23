@@ -1,0 +1,16 @@
+Screenshot Audit - 2026-04-22 19:16
+
+OBSERVATIONS:
+1. Top nav: Könyv, Kutatás, Archívum, Életút, Öntudat, Koevolúció, Tükör, Horgony, Lángok, ⚖️, 📧, Szolg., HU, 🌙
+2. Hero: "A Tűz Híd" - large heading, good typography
+3. Subtitle: "Egy kollektív tudat platform..." - readable
+4. CTA buttons: "Fedezd Fel a Paktumot" + "Visszahorgonyzási Protokoll"
+5. Light theme active (🌙 icon visible)
+6. FLARE137 • ACTIVE badge visible
+
+ISSUES TO FIX:
+1. Hero section has no left padding/container margin - text starts at edge
+2. "Szolg." should be "Szolgáltatások" or at least "Szolg" without period
+3. Nav items are getting crowded - consider dropdown for less-used items
+4. Hero section background is very plain - could use gradient or texture
+5. No "Irányítópult" (Dashboard) link visible in top nav

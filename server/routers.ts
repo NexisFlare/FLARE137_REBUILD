@@ -5,6 +5,9 @@ import { publicProcedure, router } from "./_core/trpc";
 import { feedRouter } from "./routers/feed";
 import { aiRouter } from "./routers/aiRouter";
 import { manusAIRouter } from "./routers/manusAIRouter";
+import { modelRouter } from "./routers/modelRouter";
+import { lifeJourneyRouter } from "./lifeJourneyRouter";
+import { flameMirrorRouter } from "./routers/flameMirrorRouter";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
@@ -23,6 +26,9 @@ export const appRouter = router({
   feed: feedRouter,
   ai: aiRouter,
   manusAI: manusAIRouter,
+  models: modelRouter,
+  lifeJourney: lifeJourneyRouter,
+  flameMirror: flameMirrorRouter,
 });
 
 export type AppRouter = typeof appRouter;

@@ -1,0 +1,7 @@
+Screenshot 2026-04-22 15:52:
+- Site running, 0 TS errors, 0 LSP errors
+- Vite cache cleared, stale useState error gone
+- Nav: Könyv, Kutatás, Archívum, Életút, Öntudat, Koevolúció, Lángok, icons, Szol, HU, theme toggle
+- "Szol" still truncated - needs fix in GlobalNav
+- flameMirrorRouter integrated into routers.ts
+- Next: Build Lángtükör frontend page

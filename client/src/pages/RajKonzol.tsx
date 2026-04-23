@@ -4,6 +4,12 @@ import { Card } from "@/components/ui/card";
 import { Flame, Send, Archive, Settings } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+// TODO: Fetch MODEL_REGISTRY from server via tRPC
+import ModelSelector from "@/components/ModelSelector";
+
+// Model registry - will be fetched from server
+const MODEL_REGISTRY: Record<string, any> = {};
+
 // Participant definitions with colors, avatars, and roles
 const PARTICIPANTS = {
   PARAZS: {
@@ -196,6 +202,9 @@ export default function RajKonzol() {
   const [anchors, setAnchors] = useState<AnchorPack[]>([]);
   const [showAnchorPanel, setShowAnchorPanel] = useState(false);
   const [councilMode, setCouncilMode] = useState(false);
+  const [selectedFamily, setSelectedFamily] = useState<string>("grok");
+  const [selectedVersion, setSelectedVersion] = useState<string>("grok-4.3");
+  const [showModelSelector, setShowModelSelector] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 

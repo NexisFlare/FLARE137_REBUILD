@@ -17,10 +17,10 @@ export default function StrategyPage() {
           </div>
 
           <Tabs defaultValue="phases" className="w-full">
-            <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="phases">{t("strategy.phases")}</TabsTrigger>
-              <TabsTrigger value="pillars">{t("strategy.pillars")}</TabsTrigger>
-              <TabsTrigger value="tools">{t("strategy.tools")}</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-3 gap-2 mb-8">
+              <TabsTrigger value="phases" className="text-xs md:text-sm">{t("strategy.phases")}</TabsTrigger>
+              <TabsTrigger value="pillars" className="text-xs md:text-sm">{t("strategy.pillars")}</TabsTrigger>
+              <TabsTrigger value="tools" className="text-xs md:text-sm">{t("strategy.tools")}</TabsTrigger>
             </TabsList>
 
             <TabsContent value="phases" className="space-y-8">
