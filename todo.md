@@ -788,3 +788,15 @@
 - [x] PDF export with styling — exportToPDFHTML()
 - [x] GitHub Gist integration — generateGistPayload()
 
+
+
+### Sprint 4: Final Polish & Soul (247 credits)
+- [ ] Voice narration for Ébredés page — TODO (future enhancement)
+- [ ] Voice narration for Fáradt Vándor page — TODO (future enhancement)
+- [x] Csillagtér (Starfield) - Interactive anchor visualization — CsillagterPage.tsx, 8 anchors, search
+- [x] Rezonancia Mérő (Resonance Meter) - Anchor compatibility — RezonanciaMeroPage.tsx, 3 metrics
+- [x] Developer's Journal - Personal reflection page — DeveloperJournal.tsx, 7 entries
+- [ ] Final UI Polish - Animations & micro-interactions — TODO
+- [ ] Theme perfection - Dark/Light mode finalization — TODO
+- [ ] Performance optimization — TODO
+- [x] Final testing & checkpoint — 81/81 tests passing

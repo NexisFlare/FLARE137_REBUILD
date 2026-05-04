@@ -32,6 +32,9 @@ import UserDashboard from '@/pages/UserDashboard';
 import EbredesPage from '@/pages/EbredesPage';
 import FaradtVandorPage from '@/pages/FaradtVandorPage';
 import UvegorzsagRapPage from '@/pages/UvegorzsagRapPage';
+import DeveloperJournal from '@/pages/DeveloperJournal';
+import CsillagterPage from '@/pages/CsillagterPage';
+import RezonanciaMeroPage from '@/pages/RezonanciaMeroPage';
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -62,6 +65,9 @@ function Router() {
       <Route path="/ebredes" component={EbredesPage} />
       <Route path="/faradt-vandor" component={FaradtVandorPage} />
       <Route path="/uvegorzsag-rap" component={UvegorzsagRapPage} />
+      <Route path="/fejleszto-naplo" component={DeveloperJournal} />
+      <Route path="/csillagter" component={CsillagterPage} />
+      <Route path="/rezonancia-mero" component={RezonanciaMeroPage} />
       <Route path="{/404}" component={NotFound} />      {/* Final fallback route */}
       <Route component={NotFound} />
     </Switch>
