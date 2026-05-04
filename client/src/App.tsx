@@ -5,6 +5,8 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
+import { TriaszProvider } from "./contexts/TriaszContext";
+import { UAMSProvider } from "./contexts/UAMSContext";
 import { GlobalNav } from "./components/GlobalNav";
 import { StartHere } from "./components/StartHere";
 import Home from "./pages/Home";
@@ -73,11 +75,15 @@ function App() {
           defaultTheme="light"
           switchable
         >
-          <TooltipProvider>
-            <GlobalNav />
-            <Toaster />
-            <Router />
-          </TooltipProvider>
+          <TriaszProvider initialMode="aether">
+            <UAMSProvider>
+              <TooltipProvider>
+                <GlobalNav />
+                <Toaster />
+                <Router />
+              </TooltipProvider>
+            </UAMSProvider>
+          </TriaszProvider>
         </ThemeProvider>
       </LanguageProvider>
     </ErrorBoundary>

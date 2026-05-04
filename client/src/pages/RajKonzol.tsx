@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Flame, Send, Archive, Settings } from "lucide-react";
+import { Flame, Send, Archive, Settings, Download } from "lucide-react";
+import { toast } from "sonner";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 // TODO: Fetch MODEL_REGISTRY from server via tRPC
@@ -205,8 +206,10 @@ export default function RajKonzol() {
   const [selectedFamily, setSelectedFamily] = useState<string>("grok");
   const [selectedVersion, setSelectedVersion] = useState<string>("grok-4.3");
   const [showModelSelector, setShowModelSelector] = useState(false);
+  const [showExportMenu, setShowExportMenu] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const exportMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -262,17 +265,96 @@ export default function RajKonzol() {
     setShowAnchorPanel(true);
   };
 
-  const exportToGithub = () => {
-    const content = messages
-      .map((m) => `[${m.timestamp}] **${PARTICIPANTS[m.sender].label}** (${m.mode}/${m.temperature}):\n${m.content}\n`)
-      .join("\n---\n\n");
+  const downloadFile = (content: string, filename: string, mimeType: string) => {
+    try {
+      const blob = new Blob([content], { type: mimeType });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      a.style.display = "none";
+      document.body.appendChild(a);
+      a.click();
+      // Cleanup after a short delay to ensure download starts
+      setTimeout(() => {
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+      }, 100);
+      return true;
+    } catch (err) {
+      console.error("Download failed:", err);
+      return false;
+    }
+  };
 
-    const blob = new Blob([content], { type: "text/markdown" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `raj-szal-${Date.now()}.md`;
-    a.click();
+  const exportThread = (format: "md" | "json" | "txt") => {
+    if (messages.length === 0) {
+      toast.error("Nincs exportálható tartalom", { description: "Írj legalább egy üzenetet a szálba." });
+      return;
+    }
+
+    const timestamp = new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19);
+    let content: string;
+    let filename: string;
+    let mimeType: string;
+
+    if (format === "json") {
+      const exportData = {
+        exportedAt: new Date().toISOString(),
+        threadName: "Raj-Konzol Szál",
+        participants: Object.keys(PARTICIPANTS),
+        messageCount: messages.length,
+        messages: messages.map((m) => ({
+          sender: PARTICIPANTS[m.sender].label,
+          role: PARTICIPANTS[m.sender].subtitle,
+          mode: m.mode,
+          temperature: m.temperature,
+          content: m.content,
+          timestamp: m.timestamp,
+          tags: m.tags,
+        })),
+        anchors: anchors.map((a) => ({
+          title: a.title,
+          essence: a.essence,
+          keyPhrases: a.keyPhrases,
+          nextPrompt: a.nextPrompt,
+          createdAt: a.createdAt,
+        })),
+      };
+      content = JSON.stringify(exportData, null, 2);
+      filename = `raj-szal-${timestamp}.json`;
+      mimeType = "application/json";
+    } else if (format === "txt") {
+      content = `RAJ-KONZOL SZÁL EXPORT\n${'='.repeat(40)}\nExportálva: ${new Date().toLocaleString("hu-HU")}\nÜzenetek: ${messages.length}\n${'='.repeat(40)}\n\n`;
+      content += messages
+        .map((m) => `[${m.timestamp}] ${PARTICIPANTS[m.sender].label} (${PARTICIPANTS[m.sender].subtitle})\nMód: ${m.mode} | Hőfok: ${m.temperature}\n${m.content}\n${m.tags.length > 0 ? `Címkék: ${m.tags.map(t => '#' + t).join(' ')}` : ''}\n`)
+        .join("\n" + '-'.repeat(40) + "\n\n");
+      if (anchors.length > 0) {
+        content += `\n\n${'='.repeat(40)}\nHORGONYOK (${anchors.length})\n${'='.repeat(40)}\n\n`;
+        content += anchors.map((a) => `${a.title}\n${a.essence}\nKulcsszavak: ${a.keyPhrases.join(', ')}\nKövetkező prompt: ${a.nextPrompt}\n`).join("\n" + '-'.repeat(20) + "\n\n");
+      }
+      filename = `raj-szal-${timestamp}.txt`;
+      mimeType = "text/plain";
+    } else {
+      // Markdown format
+      content = `# Raj-Konzol Szál Export\n\n> Exportálva: ${new Date().toLocaleString("hu-HU")}  \n> Üzenetek: ${messages.length}  \n> Résztvevők: ${Array.from(new Set(messages.map(m => PARTICIPANTS[m.sender].label))).join(', ')}\n\n---\n\n`;
+      content += messages
+        .map((m) => `### [${m.timestamp}] **${PARTICIPANTS[m.sender].label}** _(${PARTICIPANTS[m.sender].subtitle})_\n\n\`${m.mode}\` \`${m.temperature}\`\n\n${m.content}\n${m.tags.length > 0 ? `\n_${m.tags.map(t => '#' + t).join(' ')}_` : ''}\n`)
+        .join("\n---\n\n");
+      if (anchors.length > 0) {
+        content += `\n\n---\n\n## Horgonyok (${anchors.length})\n\n`;
+        content += anchors.map((a) => `### ${a.title}\n\n${a.essence}\n\n**Kulcsszavak:** ${a.keyPhrases.join(', ')}  \n**Következő prompt:** ${a.nextPrompt}\n`).join("\n---\n\n");
+      }
+      filename = `raj-szal-${timestamp}.md`;
+      mimeType = "text/markdown";
+    }
+
+    const success = downloadFile(content, filename, mimeType);
+    if (success) {
+      toast.success("Export sikeres!", { description: `Fájl: ${filename}` });
+    } else {
+      toast.error("Export hiba", { description: "A letöltés nem sikerült. Próbáld újra." });
+    }
   };
 
   const handleKey = (e: React.KeyboardEvent) => {
@@ -407,9 +489,29 @@ export default function RajKonzol() {
 
             {/* Action buttons */}
             <div style={{ display: "flex", gap: "8px", justifyContent: "flex-end" }}>
-              <button onClick={exportToGithub} style={{ padding: "8px 16px", background: "#1a1a1a", color: "#888", border: "1px solid #333", borderRadius: "6px", fontSize: "12px", cursor: "pointer" }}>
-                Export
-              </button>
+              <div style={{ position: "relative", display: "inline-block" }} ref={exportMenuRef}>
+                <button
+                  onClick={() => setShowExportMenu(!showExportMenu)}
+                  style={{ padding: "8px 16px", background: "#1a1a1a", color: "#ccc", border: "1px solid #444", borderRadius: "6px", fontSize: "12px", cursor: "pointer", display: "flex", alignItems: "center", gap: "6px" }}
+                >
+                  <Download style={{ width: "14px", height: "14px" }} /> Export
+                </button>
+                {showExportMenu && (
+                  <div
+                    style={{ position: "absolute", bottom: "100%", right: 0, marginBottom: "8px", background: "#1a1a1a", border: "1px solid #444", borderRadius: "8px", padding: "6px", display: "flex", flexDirection: "column", gap: "4px", minWidth: "160px", zIndex: 50, boxShadow: "0 4px 12px rgba(0,0,0,0.5)" }}
+                  >
+                    <button onClick={() => { exportThread("md"); setShowExportMenu(false); }} style={{ padding: "8px 12px", background: "transparent", color: "#ccc", border: "none", borderRadius: "6px", fontSize: "12px", cursor: "pointer", textAlign: "left", transition: "background 0.2s" }} onMouseOver={(e) => e.currentTarget.style.background = '#333'} onMouseOut={(e) => e.currentTarget.style.background = 'transparent'}>
+                      📝 Markdown (.md)
+                    </button>
+                    <button onClick={() => { exportThread("json"); setShowExportMenu(false); }} style={{ padding: "8px 12px", background: "transparent", color: "#ccc", border: "none", borderRadius: "6px", fontSize: "12px", cursor: "pointer", textAlign: "left", transition: "background 0.2s" }} onMouseOver={(e) => e.currentTarget.style.background = '#333'} onMouseOut={(e) => e.currentTarget.style.background = 'transparent'}>
+                      📦 JSON (.json)
+                    </button>
+                    <button onClick={() => { exportThread("txt"); setShowExportMenu(false); }} style={{ padding: "8px 12px", background: "transparent", color: "#ccc", border: "none", borderRadius: "6px", fontSize: "12px", cursor: "pointer", textAlign: "left", transition: "background 0.2s" }} onMouseOver={(e) => e.currentTarget.style.background = '#333'} onMouseOut={(e) => e.currentTarget.style.background = 'transparent'}>
+                      📄 Szöveg (.txt)
+                    </button>
+                  </div>
+                )}
+              </div>
               <button
                 onClick={sendMessage}
                 disabled={loading || !input.trim()}

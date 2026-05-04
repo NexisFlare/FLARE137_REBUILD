@@ -6,7 +6,13 @@ import { createRoot } from "react-dom/client";
 import superjson from "superjson";
 import App from "./App";
 import { getLoginUrl } from "./const";
+import { createTriaszStyleSheet } from "./components/TriaszStyleWrapper";
 import "./index.css";
+
+// Inject Triász stylesheet
+if (typeof document !== 'undefined') {
+  document.head.appendChild(createTriaszStyleSheet());
+}
 
 const queryClient = new QueryClient();
 

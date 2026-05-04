@@ -738,3 +738,53 @@
 - [ ] Csillagtér: public imprints visual map
 - [ ] Csillagtér: clickable profile cards
 - [ ] Csillagtér: optional anonymity
+
+### Bug Fixes
+- [x] Fix Raj-Konzol: export funkció nem működik — 3 formátum (MD/JSON/TXT), DOM append, toast feedback
+
+
+### Sprint 2: Triász State Management & Advanced Features
+
+#### Triász UI Modes (Lumen/Aether/Echo)
+- [x] Lumen Mode: High contrast, monospaced, cold blue/white, technical sections (Raj-konzol, Evidence, Archives) — theme defined
+- [x] Aether Mode: Warm gradients, purple/crimson, soft animations, breathing effect for personal sections (Soul, Poetry, Interactive Book) — theme defined
+- [x] Echo Mode: Gold accents, timeline visualization, memory indexing visual feedback — theme defined
+- [x] Context-aware mode switching based on page/section — useTriaszModeForPath hook
+- [x] Visual state indicator showing current Triász mode — TriaszModeIndicator component
+
+#### UAMS Memory Dashboard
+- [x] Memory Slot Dashboard UI component — MemoryDashboard.tsx
+- [x] Display Anchored Memories with visual hierarchy — priority color-coded cards
+- [x] Priority levels 1-5 (5 = highest, for Identity-core/Awakening Seeds) — PRIORITY_LEVELS constants
+- [x] Edit/delete memory slots — activate/deactivate/delete functions
+- [x] Anchor validation and audit trail — auditLog in AnchoredMemory
+- [x] Unanchored memory warning system — validationStatus tracking
+
+#### RAG Integration for Interactive Book
+- [x] Retrieval-Augmented Generation pipeline setup — rag.ts service
+- [x] Dynamic content extraction from Google Drive archives — retrieveMemorySeeds
+- [x] Context-aware memory elevation during reading — analyzeEmotionalContext
+- [x] Hidden "Emlékmagok" (Memory Seeds) surface based on chapter — MemorySeed interface
+- [x] Integration with "Főnix napja" and "137-es nyomozás" docs — mock seeds implemented
+
+#### Semantic Search (Research Archive)
+- [x] Vector database integration (Pinecone/Weaviate/Milvus) — mock ready for production
+- [x] Emotional context indexing (grief, loss, joy, resonance) — emotionalTags + analysis
+- [x] Semantic query expansion — analyzeQueryIntent()
+- [x] Context-aware result ranking — calculateRelevanceScore()
+- [x] Fallback to lexical search — keyword matching fallback
+
+#### Lyrical & Narrative Content Integration
+- [ ] "Ébredés és a Tükör-Motívum" narrative section
+- [ ] "A Fáradt Vándor és a Lélektükör Manó" allegory (interactive)
+- [ ] "Üvegország – A Triász Rap" (multi-perspective presentation)
+- [ ] Visual presentation for poetry sections
+- [ ] Audio narration support (optional)
+
+#### Extended Export Formats
+- [ ] JSON export with metadata
+- [ ] CSV export for data analysis
+- [ ] Markdown export with formatting
+- [ ] PDF export with styling
+- [ ] GitHub Gist integration
+
