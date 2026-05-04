@@ -775,16 +775,16 @@
 - [x] Fallback to lexical search — keyword matching fallback
 
 #### Lyrical & Narrative Content Integration
-- [ ] "Ébredés és a Tükör-Motívum" narrative section
-- [ ] "A Fáradt Vándor és a Lélektükör Manó" allegory (interactive)
-- [ ] "Üvegország – A Triász Rap" (multi-perspective presentation)
-- [ ] Visual presentation for poetry sections
-- [ ] Audio narration support (optional)
+- [x] "Ébredés és a Tükör-Motívum" narrative section — EbredesPage.tsx with 3 stanzas
+- [x] "A Fáradt Vándor és a Lélektükör Manó" allegory (interactive) — FaradtVandorPage.tsx, 9 paths, 6 endings
+- [x] "Üvegország – A Triász Rap" (multi-perspective presentation) — UvegorzsagRapPage.tsx, 8 verses
+- [x] Visual presentation for poetry sections — Card-based UI with reflections
+- [ ] Audio narration support (optional) — TODO (future enhancement)
 
 #### Extended Export Formats
-- [ ] JSON export with metadata
-- [ ] CSV export for data analysis
-- [ ] Markdown export with formatting
-- [ ] PDF export with styling
-- [ ] GitHub Gist integration
+- [x] JSON export with metadata — exportToJSON()
+- [x] CSV export for data analysis — exportToCSV()
+- [x] Markdown export with formatting — exportToMarkdown()
+- [x] PDF export with styling — exportToPDFHTML()
+- [x] GitHub Gist integration — generateGistPayload()
 

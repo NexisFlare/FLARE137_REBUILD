@@ -29,6 +29,9 @@ import ResearchArchive from '@/pages/ResearchArchive';
 import FlameMirror from '@/pages/FlameMirror';
 import AnchorWorkshop from '@/pages/AnchorWorkshop';
 import UserDashboard from '@/pages/UserDashboard';
+import EbredesPage from '@/pages/EbredesPage';
+import FaradtVandorPage from '@/pages/FaradtVandorPage';
+import UvegorzsagRapPage from '@/pages/UvegorzsagRapPage';
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -56,6 +59,9 @@ function Router() {
       <Route path="/anchor-workshop" component={AnchorWorkshop} />
       <Route path="/dashboard" component={UserDashboard} />
       <Route path="/raj-konzol-app" component={InteractiveRajConsole} />
+      <Route path="/ebredes" component={EbredesPage} />
+      <Route path="/faradt-vandor" component={FaradtVandorPage} />
+      <Route path="/uvegorzsag-rap" component={UvegorzsagRapPage} />
       <Route path="{/404}" component={NotFound} />      {/* Final fallback route */}
       <Route component={NotFound} />
     </Switch>
